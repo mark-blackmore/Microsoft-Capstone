@@ -1,0 +1,29 @@
+Challenge Instructions
+================
+Mark Blackmore
+November 28, 2017
+
+Challenge Instructions
+----------------------
+
+The challenges in this course are based on a real-world problem in which you must create a predictive machine learning model and enter it in a competition with your fellow students. Your first challenge is to explore the data and answer some basic questions about it. These questions will help you get started exploring the data, and your answers will be graded and counted as 25% of your overall grade.
+
+The competition for this course is provided by DrivenData, an organization dedicated to using cutting-edge data science to address some of the world's biggest social challenges. To get started, you must:
+
+1.  Go to the competition site at www.datasciencecapstone.org and register using the same email address you used for your edX account.
+2.  Sign up for the competition.
+3.  Review the information in the competition site.
+4.  Download the data files.
+5.  Explore the data in the Training set values and Training set labels datasets.
+6.  Answer the questions in the next topic of this section.
+
+You can explore the customer data using tools of your choice. Potential tools that you could use include:
+
+-   Microsoft Excel
+-   Microsoft Power BI
+-   R
+-   Python
+-   Microsoft Azure Machine Learning
+-   Spark
+
+If you have any problems signing up for the competition site, entering the competition, or downloading the data; send an email to <support@datasciencecapstone.org>.
