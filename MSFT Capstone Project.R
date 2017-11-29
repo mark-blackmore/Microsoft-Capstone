@@ -11,10 +11,7 @@
 #+ startup, echo = FALSE 
 rm(list = ls())
 suppressPackageStartupMessages({
-library(readr)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 library(caret)
 library(glmnet)
 library(ranger)
@@ -344,30 +341,30 @@ ggplot(data = train, aes(x = admissions__admission_rate_overall, y = repayment_r
 # getTrainPerf(modelrangerRed4)
 # modelrangerRedout4 <- predict(modelrangerRed4, testRedMiss2, na.action = na.pass)
 #######################################################################################
-# Experiment: Results RMSE 8.11 - on par with full data set
-## Sum the academics columns as a new variable; Run a Lasso
-trainSumAca <- mutate(train, sumAca = sum(starts_with("academics")))
-dim(trainSumAca)
-## Drop the original academics colums
-trainSumAca <- select(trainSumAca, -starts_with("academics"))
-dim(trainSumAca)
-aggr(trainSumAca)
-## Run a Lasso
-modSumAca = train(repayment_rate~., data = trainSumAca, method = "glmnet",
-            preProcess = c("nzv", "medianImpute", "center", "scale"),
-            tuneGrid = expand.grid(alpha = 0:1, lambda = seq(.0001, 10, length = 1000)),
-            trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE,
-                preProcOptions = list(freqCut = 2, uniqueCut = 20)),
-            na.action = na.pass)
-modSumAca
-plot(modSumAca)
-getTrainPerf(modSumAca)
-varImp(modSumAca)
-# modSumAcaOut <- predict(trainSumAca, FIX = xform test, na.action = na.pass)
+# # Experiment: Results RMSE 8.11 - on par with full data set
+# ## Sum the academics columns as a new variable; Run a Lasso
+# trainSumAca <- mutate(train, sumAca = sum(starts_with("academics")))
+# dim(trainSumAca)
+# ## Drop the original academics colums
+# trainSumAca <- select(trainSumAca, -starts_with("academics"))
+# dim(trainSumAca)
+# aggr(trainSumAca)
+# ## Run a Lasso
+# modSumAca = train(repayment_rate~., data = trainSumAca, method = "glmnet",
+#             preProcess = c("nzv", "medianImpute", "center", "scale"),
+#             tuneGrid = expand.grid(alpha = 0:1, lambda = seq(.0001, 10, length = 1000)),
+#             trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE,
+#                 preProcOptions = list(freqCut = 2, uniqueCut = 20)),
+#             na.action = na.pass)
+# modSumAca
+# plot(modSumAca)
+# getTrainPerf(modSumAca)
+# varImp(modSumAca)
+# # modSumAcaOut <- predict(trainSumAca, FIX = xform test, na.action = na.pass)
 ######################################################################################
 # Experiment: RMSE of 7.11
 ## Sum the academics columns as a new variable; Run a Ranger
-trainSumAca <- mutate(train, sumAca = sum(starts_with("academics")))
+trainSumAca <- train %>% mutate(sumAca = sum(starts_with("academics")))
 dim(trainSumAca)
 testSumAca <- mutate(test, sumAca = sum(starts_with("academics")))
 dim(testSumAca)
@@ -392,3 +389,9 @@ getTrainPerf(modelranger)
 # Add dummy variables
 # library(VIM)
 # aggr(trainRed)
+
+#' -------------
+#'  
+#' ## Session info
+#+ show-sessionInfo
+sessionInfo()

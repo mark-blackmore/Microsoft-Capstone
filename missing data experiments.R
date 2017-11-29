@@ -11,10 +11,7 @@
 #+ startup, echo = FALSE 
 rm(list = ls())
 suppressPackageStartupMessages({
-library(readr)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 library(caret)
 library(glmnet)
 library(ranger)
@@ -117,9 +114,9 @@ test$school__state <- as.factor(test$school__state)
 test$school__women_only <- as.factor(test$school__women_only)
 
 # Collapse the academic variables
-train_values <- mutate(train_values, sumAca = sum(starts_with("academics")))
+#train_values <- mutate(train_values, sumAca = sum(starts_with("academics")))
 train_values <- select(train_values, -starts_with("academics"))
-test <- mutate(test, sumAca = sum(starts_with("academics")))
+#test <- mutate(test, sumAca = sum(starts_with("academics")))
 test <- select(test, -starts_with("academics"))
 
 # Relevel factor variables
@@ -241,4 +238,10 @@ modelrangerout <- predict(modelranger, test, na.action = na.pass)
 # plot(modelranger)
 # getTrainPerf(modelranger)
 # modelrangerout <- predict(modelranger, test, na.action = na.pass)
+
+#' -------------
+#'  
+#' ## Session info
+#+ show-sessionInfo
+sessionInfo()
 

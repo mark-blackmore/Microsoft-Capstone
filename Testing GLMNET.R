@@ -11,10 +11,7 @@
 #+ startup, echo = FALSE 
 rm(list = ls())
 suppressPackageStartupMessages({
-library(readr)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 library(caret)
 library(glmnet)
 library(ranger)
@@ -108,4 +105,8 @@ test  <- select(test, -row_id)
 
 ########################################################################################
 
-
+#' -------------
+#'  
+#' ## Session info
+#+ show-sessionInfo
+sessionInfo()
