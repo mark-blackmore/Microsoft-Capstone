@@ -1,4 +1,4 @@
-Challenge Instructions
+Challenge 1: Data Exploration
 ================
 Mark Blackmore
 November 28, 2017
