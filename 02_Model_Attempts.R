@@ -1,5 +1,5 @@
 #' ---
-#' title: "Capstone Project"
+#' title: "Additional Models"
 #' author: "Mark Blackmore"
 #' date: "`r format(Sys.Date())`"
 #' output: 
@@ -39,57 +39,6 @@ trainall <- full_join(train_labels,train_values, by = "row_id")
 # Remove row_id from train and test sets
 train <- select(trainall,-row_id)
 test  <- select(test, -row_id)
-
-########################################################################################
-# EDA for Quiz
-summary(train)
-summary(train$repayment_rate)
-sd(train$repayment_rate)
-hist(train$repayment_rate)
-ggplot(data = train, aes(x = repayment_rate)) + geom_histogram(bins = 10)
-
-# Median repayment rate by school ownership
-summary(train$school__ownership)
-train %>% group_by(school__ownership) %>% summarise(med = median(repayment_rate)) %>% arrange(med)
-
-# SAT score vs repayent rate
-summary(train$admissions__sat_scores_average_overall)
-ggplot(data = train, aes(x = admissions__sat_scores_average_overall, y = repayment_rate)) + 
-  geom_point() + geom_smooth()
-
-# Median family income vs repayent rate
-summary(train$student__demographics_median_family_income)
-ggplot(data = train, aes(x = student__demographics_median_family_income, y = repayment_rate)) + 
-  geom_point() + geom_smooth()
-
-# Region id vs repayment rate
-summary(train$school__region_id)
-train %>% group_by(school__region_id) %>% summarise(med = median(repayment_rate)) %>% arrange(med)
-
-#######################################################################################
-# EDA for Modeling
-
-# Missing Data?
-missingTrain <- apply(train, 2, function(x) sum(is.na(x)/length(x)))
-hist(missingTrain)
-
-# Carnegie Basic vs. Repayment Rate
-train %>% group_by(school__carnegie_basic) %>% summarise(med = median(repayment_rate)) %>% arrange(med)
-ggplot(data = train, aes(x = school__carnegie_basic, y = repayment_rate)) + geom_boxplot() 
-
-# Report Year vs. Repayment Rate
-train %>% group_by(report_year) %>% summarise(med = median(repayment_rate)) %>% arrange(med)
-ggplot(data = train, aes(x = report_year, y = repayment_rate)) + geom_boxplot()
-
-# EDA - Relevant
-ggplot(data = train, aes(x = aid__loan_principal, y = repayment_rate)) + geom_point() + geom_smooth() 
-ggplot(data = train, aes(x = aid__pell_grant_rate, y = repayment_rate)) + geom_point() + geom_smooth() 
-
-# More EDA - Noise
-ggplot(data = train, aes(x = admissions__admission_rate_overall, y = repayment_rate)) + geom_point() 
-ggplot(data = train, aes(x = aid__cumulative_debt_number, y = repayment_rate)) + geom_point() + geom_smooth() 
-ggplot(data = train, aes(x = aid__federal_loan_rate, y = repayment_rate)) + geom_point() + geom_smooth()
-ggplot(data = train, aes(x = admissions__admission_rate_overall, y = repayment_rate)) + geom_point() 
 
 ########################################################################################
 # Simple Predictive Modeling
